@@ -1,0 +1,86 @@
+--- ifmapC.cpp.orig	2008-07-11 17:17:15.000000000 -0700
++++ ifmapC.cpp	2008-07-11 17:19:22.000000000 -0700
+@@ -1868,7 +1868,7 @@
+ }
+ 
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out__meta__event_type(struct soap *soap, const char *tag, int id, const enum _meta__event_type *a, const char *type)
+-{	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__meta__event_type), type) || soap_send(soap, soap__meta__event_type2s(soap, *a)))
++{	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__meta__event_type), type) || soap_string_out(soap, soap__meta__event_type2s(soap, *a), 0))
+ 		return soap->error;
+ 	return soap_element_end_out(soap, tag);
+ }
+@@ -1949,7 +1949,7 @@
+ }
+ 
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out__meta__event_significance(struct soap *soap, const char *tag, int id, const enum _meta__event_significance *a, const char *type)
+-{	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__meta__event_significance), type) || soap_send(soap, soap__meta__event_significance2s(soap, *a)))
++{	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__meta__event_significance), type) || soap_string_out(soap, soap__meta__event_significance2s(soap, *a), 0))
+ 		return soap->error;
+ 	return soap_element_end_out(soap, tag);
+ }
+@@ -6681,7 +6681,7 @@
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ifmap__ResponseType(struct soap *soap, const char *tag, int id, const ifmap__ResponseType *a, const char *type)
+ {
+ 	soap_set_attr(soap, "validation", soap__ifmap__ValidationType_validation2s(soap, ((ifmap__ResponseType *)a)->validation));
+-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__ResponseType), "ifmap:ResponseType"))
++	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__ResponseType), 0))
+ 		return soap->error;
+ 	/* transient soap skipped */
+ 	if (soap_out__ifmap__union_ResponseType(soap, a->ifmap__ResponseType::__union_ResponseType, &a->ifmap__ResponseType::union_ResponseType))
+@@ -7755,7 +7755,7 @@
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ifmap__PollRequestType(struct soap *soap, const char *tag, int id, const ifmap__PollRequestType *a, const char *type)
+ {
+ 	soap_set_attr(soap, "validation", soap__ifmap__ValidationType_validation2s(soap, ((ifmap__PollRequestType *)a)->validation));
+-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__PollRequestType), "ifmap:PollRequestType"))
++	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__PollRequestType), 0))
+ 		return soap->error;
+ 	/* transient soap skipped */
+ 	return soap_element_end_out(soap, tag);
+@@ -7896,7 +7896,7 @@
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ifmap__SubscribeRequestType(struct soap *soap, const char *tag, int id, const ifmap__SubscribeRequestType *a, const char *type)
+ {
+ 	soap_set_attr(soap, "validation", soap__ifmap__ValidationType_validation2s(soap, ((ifmap__SubscribeRequestType *)a)->validation));
+-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__SubscribeRequestType), "ifmap:SubscribeRequestType"))
++	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__SubscribeRequestType), 0))
+ 		return soap->error;
+ 	/* transient soap skipped */
+ 	if (a->ifmap__SubscribeRequestType::__union_SubscribeRequestType)
+@@ -8201,7 +8201,7 @@
+ 	if (((ifmap__SearchRequestType *)a)->result_filter)
+ 		soap_set_attr(soap, "result-filter", ((ifmap__SearchRequestType *)a)->result_filter);
+ 	soap_set_attr(soap, "validation", soap__ifmap__ValidationType_validation2s(soap, ((ifmap__SearchRequestType *)a)->validation));
+-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__SearchRequestType), "ifmap:SearchRequestType"))
++	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__SearchRequestType), 0))
+ 		return soap->error;
+ 	/* transient soap skipped */
+ 	if (soap_out_PointerToifmap__IdentifierType(soap, "identifier", -1, &(a->ifmap__SearchRequestType::identifier), ""))
+@@ -8362,7 +8362,7 @@
+ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ifmap__PublishRequestType(struct soap *soap, const char *tag, int id, const ifmap__PublishRequestType *a, const char *type)
+ {
+ 	soap_set_attr(soap, "validation", soap__ifmap__ValidationType_validation2s(soap, ((ifmap__PublishRequestType *)a)->validation));
+-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__PublishRequestType), "ifmap:PublishRequestType"))
++	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ifmap__PublishRequestType), 0))
+ 		return soap->error;
+ 	/* transient soap skipped */
+ 	if (a->ifmap__PublishRequestType::__union_PublishRequestType)
+@@ -11952,16 +11952,16 @@
+ {
+ 	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_SOAP_ENV__Header), type))
+ 		return soap->error;
+-	soap->mustUnderstand = 1;
++	soap->mustUnderstand = 0;
+ 	if (soap_out_string(soap, "ifmap:attach-session", -1, &a->ifmap__attach_session, ""))
+ 		return soap->error;
+-	soap->mustUnderstand = 1;
++	soap->mustUnderstand = 0;
+ 	if (soap_out_string(soap, "ifmap:new-session", -1, &a->ifmap__new_session, ""))
+ 		return soap->error;
+-	soap->mustUnderstand = 1;
++	soap->mustUnderstand = 0;
+ 	if (soap_out_string(soap, "ifmap:publisher-id", -1, &a->ifmap__publisher_id, ""))
+ 		return soap->error;
+-	soap->mustUnderstand = 1;
++	soap->mustUnderstand = 0;
+ 	if (soap_out_string(soap, "ifmap:session-id", -1, &a->ifmap__session_id, ""))
+ 		return soap->error;
+ 	return soap_element_end_out(soap, tag);

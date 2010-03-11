@@ -1,0 +1,38 @@
+--- ifmap.gsoap.h	2008-03-14 15:04:28.000000000 -0700
++++ ifmap.gsoap.h	2008-03-14 15:05:41.000000000 -0700
+@@ -345,8 +345,6 @@
+ /// "http://www.trustedcomputinggroup.org/2006/IFMAP/1":PublishType is a complexType.
+ class ifmap__PublishType
+ { public:
+-/// Element metadata of type "http://www.trustedcomputinggroup.org/2006/IFMAP/1":MetadataListType.
+-    ifmap__MetadataListType*             metadata                       0;	///< Optional element.
+ /// CHOICE OF ELEMENTS FOR choice minOccurs="1" maxOccurs="1"
+     int                                  __union_PublishType            1;	///< Union _ifmap__union_PublishType selector: set to SOAP_UNION__ifmap__union_PublishType_<fieldname>
+     union _ifmap__union_PublishType
+@@ -357,6 +355,8 @@
+     ifmap__LinkType*                     link                           1;	///< Required element.
+     }                                    union_PublishType             ;
+ //  END OF CHOICE
++/// Element metadata of type "http://www.trustedcomputinggroup.org/2006/IFMAP/1":MetadataListType.
++    ifmap__MetadataListType*             metadata                       0;	///< Optional element.
+ /// A handle to the soap struct that manages this instance (automatically set)
+     struct soap                         *soap                          ;
+ };
+@@ -1355,8 +1355,6 @@
+ /// Operation response struct "__wsdl__NewSessionResponse" of service binding "Service" operation "__wsdl__NewSession"
+ struct __wsdl__NewSessionResponse
+ {
+-    char*                               ifmap__session_id;
+-    char*                               ifmap__publisher_id;
+ };
+ 
+ /// Operation "__wsdl__NewSession" of service binding "Service"
+@@ -1423,8 +1421,6 @@
+ /// Operation response struct "__wsdl__AttachSessionResponse" of service binding "Service" operation "__wsdl__AttachSession"
+ struct __wsdl__AttachSessionResponse
+ {
+-    char*                               ifmap__session_id;
+-    char*                               ifmap__publisher_id;
+ };
+ 
+ /// Operation "__wsdl__AttachSession" of service binding "Service"

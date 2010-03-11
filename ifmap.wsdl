@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.trustedcomputinggroup.org/2008/IFMAP/1/ifmap.wsdl"
+ xmlns:ifmapwsdl="http://www.trustedcomputinggroup.org/2008/IFMAP/1/ifmap.wsdl"
+ xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+ xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+ xmlns:ifmap="http://www.trustedcomputinggroup.org/2006/IFMAP/1"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.trustedcomputinggroup.org/2006/IFMAP/1 ifmap-base-1.0v23.xsd">
+    <wsdl:import namespace="http://www.trustedcomputinggroup.org/2006/IFMAP/1" location="ifmap-base-1.0v23.xsd"></wsdl:import>
+    <wsdl:import namespace="http://www.trustedcomputinggroup.org/2006/IFMAP-METADATA/1" location="ifmap-metadata-1.0v23.xsd"></wsdl:import>
+    <wsdl:message name="Response">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="response" element="ifmap:response"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="PublishRequest">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="request" element="ifmap:publish"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="SearchRequest">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="request" element="ifmap:search"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="SubscribeRequest">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="request" element="ifmap:subscribe"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="PollRequest">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="request" element="ifmap:poll"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="PurgePublisherRequest">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="request" element="ifmap:purgePublisher"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="NewSessionRequest">
+        <wsdl:part name="request" element="ifmap:new-session"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:message name="AttachSessionRequest">
+        <wsdl:part name="request" element="ifmap:attach-session"></wsdl:part>
+    </wsdl:message>
+
+    <wsdl:message name="SessionResponse">
+        <wsdl:part name="session-id" element="ifmap:session-id"></wsdl:part>
+        <wsdl:part name="publisher-id" element="ifmap:publisher-id"></wsdl:part>
+    </wsdl:message>
+    
+    <wsdl:portType name="IfmapPortType">
+        <wsdl:operation name="Publish">
+            <wsdl:input message="PublishRequest"></wsdl:input>
+            <wsdl:output message="Response"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Search">
+            <wsdl:input message="SearchRequest"></wsdl:input>
+            <wsdl:output message="Response"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Subscribe">
+            <wsdl:input message="SubscribeRequest"></wsdl:input>
+            <wsdl:output message="Response"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Poll">
+            <wsdl:input message="PollRequest"></wsdl:input>
+            <wsdl:output message="Response"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PurgePublisher">
+            <wsdl:input message="PurgePublisherRequest"></wsdl:input>
+            <wsdl:output message="Response"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="NewSession">
+            <wsdl:input message="NewSessionRequest"></wsdl:input>
+            <wsdl:output message="SessionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AttachSession">
+            <wsdl:input message="AttachSessionRequest"></wsdl:input>
+            <wsdl:output message="SessionResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name="Service" type="IfmapPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="Publish">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="PublishRequest" part="session-id" use="literal"/>
+                <soap:body parts="request" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="Response" part="session-id" use="literal"/>
+                <soap:body parts="response" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Search">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="SearchRequest" part="session-id" use="literal"/>
+                <soap:body parts="request" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="Response" part="session-id" use="literal"/>
+                <soap:body parts="response" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Subscribe">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="SubscribeRequest" part="session-id" use="literal"/>
+                <soap:body parts="request" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="Response" part="session-id" use="literal"/>
+                <soap:body parts="response" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Poll">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="PollRequest" part="session-id" use="literal"/>
+                <soap:body parts="request" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="Response" part="session-id" use="literal"/>
+                <soap:body parts="response" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PurgePublisher">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="PurgePublisherRequest" part="session-id" use="literal"/>
+                <soap:body parts="request" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="Response" part="session-id" use="literal"/>
+                <soap:body parts="response" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="NewSession">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="NewSessionRequest" part="request" use="literal"/>
+                <soap:body/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="SessionResponse" part="session-id" use="literal"/>
+                <soap:header message="SessionResponse" part="publisher-id" use="literal"/>
+                <soap:body/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AttachSession">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:header message="AttachSessionRequest" part="request" use="literal"/>
+                <soap:body/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="SessionResponse" part="session-id" use="literal"/>
+                <soap:header message="SessionResponse" part="publisher-id" use="literal"/>
+                <soap:body/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="IfmapService">
+        <wsdl:documentation>IF-MAP Service</wsdl:documentation>
+        <wsdl:port name="IfmapPort" binding="Service">
+            <soap:address location="https://localhost/dana-ws/soap/dsifmap"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
